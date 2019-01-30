@@ -1,0 +1,58 @@
+@model List<Activity>
+<h1>DOJO ACTIVITY</h1>
+<h2>Add a Activity</h2>
+<h3>Hi @ViewBag.User.FirstName,</h3>
+
+
+<nav>
+<a>Dashboard |</a>
+<a href="/AddActivityPage">Add an Activity |</a>
+<a href="/Logout">Logout</a>
+</nav>
+
+
+<h3>DOJO ACTIVITY CENTER</h3>
+
+<table style="width:100%">
+  <tr>
+    <th>Activity</th>
+    <th>Date/Time</th> 
+    <th>Duration</th>
+    <th>Number of Participants</th>
+    <th>Options</th>
+  </tr>
+
+@foreach(var a in Model)
+{
+  <tr>
+    <td><a href="/ActivityProfilePage/@a.ActivityId">@a.Name</td>
+    <td>@a.DateTime</td> 
+    <td>@a.Duration</td>
+
+    <td>@a.Participants.Count</td>
+    <td>@if(@ViewBag.User.UserId == @a.UserId)
+        {
+          <a href="/deleteActivity/@a.ActivityId">Delete</a>
+        }
+        else
+        {
+          bool istrue = false;
+          foreach(var r in @a.Participants)
+          {
+            if(r.UserId == ViewBag.User.UserId)
+            {
+                istrue = true;
+            }
+          }
+          if(istrue == true)
+          {
+            <a href="/UnParticipant/@a.ActivityId">Leave</a>
+          }
+          else
+          {
+            <a href="/Participant/@a.ActivityId">Join</a>
+          }
+        }</td>
+  </tr>
+}
+

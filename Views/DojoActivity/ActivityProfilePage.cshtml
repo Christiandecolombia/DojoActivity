@@ -1,0 +1,70 @@
+
+<h1>DOJO ACTIVITY</h1>
+<h2>Add a Activity</h2>
+<h3>Hi @ViewBag.User.FirstName,</h3>
+
+
+<nav>
+<a href="/Dashboard">Dashboard |</a>
+<a href="/AddActivityPage">Add an Activity |</a>
+<a href="/Logout">Logout</a>
+</nav>
+
+
+
+
+
+
+
+
+
+<table style="width:100%">
+    <tr>
+        <th>Activity</th>
+        <th>Event Coordinator</th>
+        <th>DateTime</th>
+        <th>Duration</th>
+        <th>Participants</th>
+        <th>Discription</th>
+    </tr>
+    <tr>
+        <td>@Model.Name</td>
+        <td>@ViewBag.Creater.FirstName</td>
+        <td>@Model.DateTime</td> 
+        <td>@Model.Duration</td>
+        <td>@Model.Discription</td>
+        <td>@foreach(var a in Model.Participants)
+            {
+                <p>@a.User.FirstName</p>
+            }</td>
+    </tr>
+</table>
+
+
+<h4>Options
+    @if(@ViewBag.User.UserId == @Model.UserId)
+    {
+        <a href="/deleteActivity/@Model.ActivityId">Delete</a>
+    }
+    else
+    {
+    bool istrue = false;
+        foreach(var r in @Model.Participants)
+        {
+            if(r.UserId == ViewBag.User.UserId)
+            {
+                istrue = true;
+            }
+        }
+        if(istrue == true)
+            {
+                <a href="/UnParticipant/@Model.ActivityId">Leave</a>
+            }
+        else
+            {
+                <a href="/Participant/@Model.ActivityId">Join</a>
+            }
+        }</h4>
+ 
+
+

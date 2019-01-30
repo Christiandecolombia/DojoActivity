@@ -1,0 +1,35 @@
+@model Activity
+<h1>DOJO ACTIVITY</h1>
+<h2>Add a Activity</h2>
+<h3>Hi @ViewBag.User.FirstName,</h3>
+
+<nav>
+<a href="/Dashboard">Dashboard |</a>
+<a>Add an Activity |</a>
+<a href="/Logout">Logout</a>
+</nav>
+
+<form asp-action="PostActivity" asp-controller="DojoActivity" method="post">
+    <br>
+    <input type="hidden" asp-for="UserId" value="@ViewBag.User.UserId">
+
+<span asp-validation-for="Name"></span>
+    <label asp-for="Name"></label>
+    <input asp-for="Name">
+
+    <span asp-validation-for="DateTime"></span>
+    <label asp-for="DateTime"></label>
+    <input asp-for="DateTime">
+
+    <span asp-validation-for="Duration"></span>
+    <label asp-for="Duration"></label>
+    <input asp-for="Duration">
+
+    <span asp-validation-for="Discription"></span>
+    <label asp-for="Discription"></label>
+    <input asp-for="Discription">
+    <button>Submit</button>
+
+</form>
+
+
